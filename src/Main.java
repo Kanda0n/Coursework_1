@@ -1,7 +1,7 @@
 import java.text.DecimalFormat;
 
 public class Main {
-    private Employee[] listOfEmployees;
+    private static Employee[] listOfEmployees;
 
     public Main() {
         listOfEmployees = new Employee[10];
@@ -16,27 +16,25 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Coursework 1.");
-        //   Employee[] listOfEmployees = new Employee[10];
-        Main main = new Main();
 
-        main.printAllEmployees();
-        System.out.println("Общие затраты на зарплату: " + main.calculateTotalMonthlyCost());
-        System.out.println("Минимальная зарплата: " + main.findEmployeeWithMinSalary());
-        System.out.println("Максимальная зарплата: " + main.findEmployeeWithMaxSalary());
+        printAllEmployees();
+        System.out.println("Общие затраты на зарплату: " + calculateTotalMonthlyCost());
+        System.out.println("Минимальная зарплата: " + findEmployeeWithMinSalary());
+        System.out.println("Максимальная зарплата: " + findEmployeeWithMaxSalary());
         DecimalFormat normalAverage = new DecimalFormat("#.##");
-        System.out.println("Средняя зарплата: " + normalAverage.format(main.calculateAverageSalary())
+        System.out.println("Средняя зарплата: " + normalAverage.format(calculateAverageSalary())
                 + " рублей.");
-        main.printFullNames();
+        printFullNames();
     }
 
-    public void printAllEmployees() {
+    public static void printAllEmployees() {
         System.out.println("Список всех сотрудников:");
         for (byte i = 0; i < Employee.idCounter; i++) {
             System.out.println(listOfEmployees[i]);
         }
     }
 
-    public double calculateTotalMonthlyCost() {
+    public static double calculateTotalMonthlyCost() {
         double totalCost = 0;
         for (byte i = 0; i < Employee.idCounter; i++) {
             totalCost += listOfEmployees[i].getSalary();
@@ -44,7 +42,7 @@ public class Main {
         return totalCost;
     }
 
-    public Employee findEmployeeWithMinSalary() {
+    public static Employee findEmployeeWithMinSalary() {
         Employee minSalaryEmployee = listOfEmployees[0];
         for (byte i = 0; i < Employee.idCounter; i++) {
             if (listOfEmployees[i].getSalary() < minSalaryEmployee.getSalary()) {
@@ -54,7 +52,7 @@ public class Main {
         return minSalaryEmployee;
     }
 
-    public Employee findEmployeeWithMaxSalary() {
+    public static Employee findEmployeeWithMaxSalary() {
         Employee maxSalaryEmployee = listOfEmployees[0];
         for (byte i = 0; i < Employee.idCounter; i++) {
             if (listOfEmployees[i].getSalary() > maxSalaryEmployee.getSalary()) {
@@ -64,12 +62,12 @@ public class Main {
         return maxSalaryEmployee;
     }
 
-    public double calculateAverageSalary() {
+    public static double calculateAverageSalary() {
         double totalCost = calculateTotalMonthlyCost();
         return totalCost / Employee.idCounter;
     }
 
-    public void printFullNames() {
+    public static void printFullNames() {
         System.out.println("ФИО сотрудников:");
         for (byte i = 0; i < Employee.idCounter; i++) {
             System.out.println(listOfEmployees[i].getName());
